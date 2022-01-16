@@ -6,15 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
     "mongoose": "^6.1.4",
-    "node": "^17.3.0"
+    "node": "^17.3.0",
+    "passport": "^0.5.2",
+    "passport-auth0": "^1.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
