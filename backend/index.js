@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const passport = require('passport');
 
-const expressSession = require('express-session');
+const cookieSession = require('cookie-session');
 require('dotenv').config({path: __dirname + '/.env'});
 require('./routes/passport-setup.js');
 
@@ -25,16 +25,21 @@ const session1 = {
   secret: process.env.SESSION_SECRET,
   cookie: {},
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+  maxAge: 60*60*24*1000,
+  keys: [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2]
 };
-app.use(expressSession(session1));
+
+
+app.use(cookieSession(session1));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', passport.authenticate(), (req,res) => {
-  res.send("hi");
+app.get('/', (req,res) => {
+  res.send(req.user);
+  
 })
-app.get('/loginFailiure', (req, res) => res.send("login failed"));
+app.get('/loginfailure', (req, res) => res.send("login fail"));
 app.get('/loginsuccess', (req, res) => res.send("logged in "));
 app.get('/google',passport.authenticate('google', { scope: ['profile','email'] }));
 app.get('/google/callback',passport.authenticate('google', { failureRedirect: '/google' }),
