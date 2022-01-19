@@ -49,6 +49,13 @@ app.get('/google/callback',passport.authenticate('google', { failureRedirect: '/
   });
 
 
+// routes
+
+app.use('/clubs', clubs);
+app.use('/events', events);
+app.use('/user', user);
+
+
 
 
 
