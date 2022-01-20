@@ -7,7 +7,6 @@ const passport = require('passport');
 
 const cookieSession = require('cookie-session');
 require('dotenv').config({path: __dirname + '/.env'});
-require('./routes/passport-setup.js');
 
 
 // app initialization and middleware 
@@ -35,127 +34,41 @@ app.use(cookieSession(session1));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req,res) => {
-  res.send(req.user);
-  
-})
-app.get('/loginfailure', (req, res) => res.send("login fail"));
-app.get('/loginsuccess', (req, res) => res.send("logged in "));
-app.get('/google',passport.authenticate('google', { scope: ['profile','email'] }));
-app.get('/google/callback',passport.authenticate('google', { failureRedirect: '/google' }),
-  function(req, res) {
-    
-    res.redirect('/loginsuccess');
-  });
-
 
 // routes
+require('./routes/passport-setup.js');
 
-app.use('/clubs', clubs);
-app.use('/events', events);
-app.use('/user', user);
+// -------------- Google oAuth Routings ------------------------------
+app.get("/auth/google",
+    passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get("/auth/google/yfest",
+    passport.authenticate("google", { failureRedirect: "/failed" }),
+    function (req, res) {
+        console.log(req.user);
+        res.redirect("/success");
+    }
+);
+
+app.get("/failed", (req, res) => {
+  res.send("Try to Login through Ahduni email or else Login Failed");
+})
+app.get("/success", (req, res) => {
+  res.send("Login Success");
+})
+
+// app.use('/clubs', clubs);
+// app.use('/events', events);
+// app.use('/user', user);
 
 
 
 
 
 // Database and Port setup
-
-const CONN_URL = `mongodb+srv://${process.env.DB_UNAME}:${process.env.DB_PWD}@cluster0.elyih.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const CONN_URL = `mongodb+srv://${process.env.DB_UNAME}:${process.env.DB_PWD}@cluster0.elyih.mongodb.net/yFEST?retryWrites=true&w=majority`;
 
 const PORT = process.env.PORT || 3000
 
-
 mongoose.connect(CONN_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {app.listen(PORT); console.log("server working");}).catch((e) => console.log(e.message));
-
-
-
-
-// // Main get post requests and routing
-
-// app.get('/login', passport.authenticate("auth0", {scope: "openid email profile"}), function(req, res){
-//     res.redirect('/');
-// });
-
-// app.get("/callback", (req, res, next) => {
-//     passport.authenticate("auth0", (err, user, info) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       if (!user) {
-//         return res.redirect("/login");
-//       }
-//     //   so essentially what we do here is we first check for error or if user is not new 
-//     //   once that is done we check if the user is logged in and auth is successful, we make a session 
-//     //   we then let user return to the session he was in "returnTo" or to home "/"
-
-//       req.logIn(user, (err) => {
-//         if (err) {
-//           return next(err);
-//         }
-//         const returnTo = req.session.returnTo;
-//         delete req.session.returnTo;
-//         res.redirect(returnTo || "/");
-//       });
-//     })(req, res, next);
-// });
-
-
-// app.get("/logout", (req, res) => {
-//   req.logOut(); // this will clear the login session on passport side 
-
-//   let returnTo = req.protocol + "://" + req.hostname;
-//   const port = req.connection.localPort;
-
-//   if (port !== undefined && port !== 80 && port !== 443) {
-//     returnTo =
-//       process.env.NODE_ENV === "production"
-//         ? `${returnTo}/`
-//         : `${returnTo}:${port}/`;
-//   }
-
-//   const logoutURL = new URL(
-//     `https://${process.env.AUTH0_DOMAIN}/v2/logout`
-//   );
-// })
-
-
-
-
-
-
-
-
-
-
-//Oauth setup and use
-
-
-
-// const strategy = new Auth0Strategy(
-//     {
-//         domain: process.env.DOMAIN,
-//         clientID: process.env.CLIENT_ID,
-//         clientSecret: process.env.SECRET, 
-//         callbackURL: process.env.AUTH0_CALLBACK
-//     },
-//     function(accessToken, refreshToken, extraParams, profile, done){
-//         return done(null, profile);
-//     }
-// )
-
-
-
-// if (app.get("env") === "production") {
-//     session.cookie.secure = true; 
-// }
-
-
-
-
-
-
-
-
-
-
