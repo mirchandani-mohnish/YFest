@@ -57,9 +57,11 @@ app.get("/success", (req, res) => {
 
 
 const userR = require("./routes/user");
+const logR = require("./routes/logInOut");
 // app.use('/clubs', clubs);
 // app.use('/events', events);
 app.use('/user', userR);
+app.use('/log', logR);
 
 
 
