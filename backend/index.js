@@ -19,11 +19,8 @@ app.use(cors());
 
 const session1 = {
   secret: process.env.SESSION_SECRET,
-  cookie: {},
   resave: false,
   saveUninitialized: true,
-  maxAge: 60*60*24*1000,
-  keys: [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2]
 };
 
 
@@ -41,12 +38,10 @@ app.get("/auth/google",
 );
 
 app.get("/auth/google/yfest",
-    passport.authenticate("google", { failureRedirect: "/failed" }),
-    function (req, res) {
-        console.log(req.user);
-        res.redirect("/user");
-    }
-);
+    passport.authenticate("google", {
+      successRedirect: '/user',
+      failureRedirect: '/log/in'
+}));
 
 app.get("/failed", (req, res) => {
   res.send("Try to Login through Ahduni email or else Login Failed");
