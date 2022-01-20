@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const passport = require('passport');
 
+
 const cookieSession = require('cookie-session');
 require('dotenv').config({path: __dirname + '/.env'});
 
@@ -16,10 +17,6 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
-// app.use(cksession({
-//   name: 'something', 
-//   keys: ['key1', 'key2']
-// }))
 const session1 = {
   secret: process.env.SESSION_SECRET,
   cookie: {},
@@ -47,7 +44,7 @@ app.get("/auth/google/yfest",
     passport.authenticate("google", { failureRedirect: "/failed" }),
     function (req, res) {
         console.log(req.user);
-        res.redirect("/success");
+        res.redirect("/user");
     }
 );
 
@@ -58,9 +55,11 @@ app.get("/success", (req, res) => {
   res.send("Login Success");
 })
 
+
+const userR = require("./routes/user");
 // app.use('/clubs', clubs);
 // app.use('/events', events);
-// app.use('/user', user);
+app.use('/user', userR);
 
 
 
