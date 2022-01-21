@@ -30,18 +30,19 @@ passport.use(new GoogleStrategy({
       User.findOne({ "googleId": data.id }, function (err, user) {
         console.log("Yeh to AU ka banda/bandi hai");
         if (err) return done(err);
-
+        
         if (!user) {
           newUser = new User({
             emailId: data.email,
-            googleId: data.id,
+            googleId: profile.id,
             name: data.name,
             admin: false,
             image: data.picture
           });
           newUser.save((err) => {
             if (err) console.log(err)
-            return done(err, user);
+            
+            return done(err, newUser);
           });
         } else {
           return done(err, user);

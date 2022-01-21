@@ -27,3 +27,5 @@ frontend/yarn-error.log*
 node_modules/
 .env.local
 .env
+
+Progress.md
