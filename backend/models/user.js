@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 
 var userSchema = new Schema({
-    emailId: { type:String},
+    username: { type:String},
     googleId: {type: String},
     name: String,
     admin:{type: Boolean},

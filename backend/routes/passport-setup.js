@@ -33,7 +33,7 @@ passport.use(new GoogleStrategy({
         
         if (!user) {
           newUser = new User({
-            emailId: data.email,
+            username: data.email,
             googleId: profile.id,
             name: data.name,
             admin: false,
