@@ -27,7 +27,7 @@ passport.use(new GoogleStrategy({
   function (accessToken, refreshToken, profile, done) {
     const data = profile._json;
     if (data.email.substring(data.email.indexOf('@') + 1) == "ahduni.edu.in" || data.hd == "ahduni.edu.in") {
-      User.findOne({ "googleId": data.id }, function (err, user) {
+      User.findOne({ "googleId": profile.id }, function (err, user) {
         console.log("Yeh to AU ka banda/bandi hai");
         if (err) return done(err);
         
