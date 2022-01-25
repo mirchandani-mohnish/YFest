@@ -13,8 +13,6 @@ import HomePg from './components/HomePg';
 
 
 function App() {
-  const [pageNo, setPageNo] = useState(0);
-  // pageNo = 0 (home)
   // 1 = Events
   // 2 = Clubs
   // 3 = Archives
@@ -29,23 +27,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/clubs" element={<Clubs />} />
-            
           <Route exact path="/events" element={<Events/>} />
-         
           <Route exact path="/archives" element={<Archives />} />
-            
-          
-          <Route path="/" element={<HomePg />} />
-            
-          
+          <Route exact path="/" element={<HomePg />} />
         </Routes>
       </BrowserRouter>
       </section>
-
       <Footer />
-      
-      
-      
     </div>
   );
 }
