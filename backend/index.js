@@ -13,8 +13,8 @@ require('dotenv').config({path: __dirname + '/.env'});
 // app initialization and middleware 
 const app = express();
 
-app.use(bodyParser.json({limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(cors());
 
 const session1 = {
@@ -53,8 +53,10 @@ app.get("/success", (req, res) => {
 
 const userR = require("./routes/user");
 const logR = require("./routes/logInOut");
-// app.use('/clubs', clubs);
-// app.use('/events', events);
+const eventsR = require("./routes/events");
+const clubsR = require("./routes/clubs");
+app.use('/clubs', clubsR);
+app.use('/events', eventsR);
 app.use('/user', userR);
 app.use('/log', logR);
 

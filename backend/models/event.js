@@ -9,7 +9,6 @@ var eventSchema = new Schema({
     eventDescription: {type: String},
     clubName: { type:String,required:true},
     date: {type: Date, default: Date.now}
-
 });
 
 

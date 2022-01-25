@@ -8,7 +8,8 @@ var userSchema = new Schema({
     username: { type:String},
     googleId: {type: String},
     name: String,
-    admin:{type: Boolean},
+    clubOwner: Boolean,
+    clubName: String,
     events:[String],
     image:String
 });

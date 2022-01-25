@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-var userSchema = new Schema({
-    clubName: {type: String, required: true},
+var clubSchema = new Schema({
+    clubName: String,
     // clubImage: {type: }
-    clubDescription: {type: String},
-    events: [ObjectId]
+    clubDescription: String,
+    events: [{type: Schema.Types.ObjectId, ref: 'event'}]
 
 });
 
 
-module.exports = mongoose.model("user",userSchema,"users");
+module.exports = mongoose.model("club",clubSchema,"clubs");
