@@ -1,15 +1,16 @@
 import logo from './logo.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import AuthLogin from './components/AuthLogin';
 import Events from './components/Events';
 import Clubs from './components/Clubs';
 import Archives from './components/Archives';
 import Footer from './components/Footer'
-import {BrowserRouter, Route, Routes, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Redirect, Link} from 'react-router-dom';
 import './App.css';
 import HomePg from './components/HomePg';
-
+import queryString from 'query-string';
+import Axios from 'axios';
 
 
 function App() {
@@ -18,17 +19,75 @@ function App() {
   // 3 = Archives
   // 4 = Contact us and About
 
+  const [mounted, setmount] = useState(0);
+  const [user,setUser] = useState();
+  const [loggedIn, setLoggedIn] = useState(0);
 
+
+  const checkLogin = async () => {
+    await Axios.get('http://localhost:3000/log/in').then(response => {
+      console.log(response.data)
+      if (!!response.data.user) {
+        console.log('THERE IS A USER')
+        // this.setState({
+        //   loggedIn: true,
+        //   user: response.data.user
+        // })
+        setLoggedIn(true);
+        setUser(response.data.user);
+        return(<Link to="/" />);
+      } else {
+        setLoggedIn(false);
+        setUser(null);
+        // this.setState({
+        //   loggedIn: false,
+        //   user: null
+        // })
+      }
+    })
+  }
+
+  useEffect(() => {
+    checkLogin();
+  }, [])
   
+
+
+  const handleLogin = async () => {
+    await Axios.get('http://localhost:3000/log/in').then(response => {
+      console.log(response.data)
+      if (!!response.data.user) {
+        console.log('THERE IS A USER')
+        // this.setState({
+        //   loggedIn: true,
+        //   user: response.data.user
+        // })
+        setLoggedIn(true);
+        setUser(response.data.user);
+        return(<h1>logged in</h1>);
+      } else {
+        setLoggedIn(false);
+        setUser(null);
+        // this.setState({
+        //   loggedIn: false,
+        //   user: null
+        // })
+        return(<h1>Sorry -- login failed</h1>)
+      }
+
+      
+    })
+  }
   return (
     <div className="App w-full">
-      <Navbar />
+      <Navbar LoggedIn={loggedIn} />
       <section id="mainSec">
         <BrowserRouter>
           <Routes>
             <Route exact path="/clubs" element={<Clubs />} />
             <Route exact path="/events" element={<Events/>} />
             <Route exact path="/archives" element={<Archives />} />
+            <Route exact path="/login" render={handleLogin}/>
             <Route path="/" element={<HomePg />} />
           </Routes>
         </BrowserRouter>
