@@ -21,19 +21,19 @@ function App() {
 
   
   return (
-    <div className="App">
+    <div className="App w-full">
       <Navbar />
       <section id="mainSec">
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/clubs" element={<Clubs />} />
-          <Route exact path="/events" element={<Events/>} />
-          <Route exact path="/archives" element={<Archives />} />
-          <Route exact path="/" element={<HomePg />} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/clubs" element={<Clubs />} />
+            <Route exact path="/events" element={<Events/>} />
+            <Route exact path="/archives" element={<Archives />} />
+            <Route path="/" element={<HomePg />} />
+          </Routes>
+        </BrowserRouter>
       </section>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
