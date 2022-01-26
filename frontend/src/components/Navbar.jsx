@@ -21,108 +21,133 @@ export default class Navbar extends Component {
     
 
     return(
-      
-        
-        <div className="h-screen fixed left-0">
-          
-          <aside className="flex flex-col items-center bg-white text-gray-700 shadow h-full">
-            
-            <div className="h-16 flex items-center w-full">
-              
-              <a className="h-6 w-6 mx-auto" href="/">
-                <img className="h-6 w-6 mx-auto" src="" alt="YFest" />
+      <div>
+        <nav className="
+          relative
+          w-full
+          flex flex-wrap
+          items-center
+          justify-between
+          py-4
+          bg-gray-100
+          text-gray-500
+          hover:text-gray-700
+          focus:text-gray-700
+          shadow-lg
+          navbar navbar-expand-lg navbar-light
+          ">
+          <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+            <button className="
+        navbar-toggler
+        text-gray-500
+        border-0
+        hover:shadow-none hover:no-underline
+        py-2
+        px-2.5
+        bg-transparent
+        focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
+            " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" className="w-6" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">
+                </path>
+              </svg>
+            </button>
+            <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
+              <a className="
+          flex
+          items-center
+          text-gray-900
+          hover:text-gray-900
+          focus:text-gray-900
+          mt-2
+          lg:mt-0
+          mr-1
+        " href="/">
+                <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" style={{height: '15px'}} alt="" loading="lazy" />
               </a>
+              {/* Left links */}
+              <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+                <li className="nav-item p-2">
+                  <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="#">Dashboard</a>
+                </li>
+                <li className="nav-item p-2">
+                  <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/events">Events</a>
+                </li>
+                <li className="nav-item p-2">
+                  <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/archives">Archives</a>
+                </li>
+              </ul>
+              {/* Left links */}
             </div>
-            <ul>
-              {/* Items Section */}
-              <li className="hover:bg-gray-100">
-                <a href="/clubs" className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-                    <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0
-                      2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0
-                      0-1.79 1.11z" />
-                  </svg>
+            {/* Collapsible wrapper */}
+            {/* Right elements */}
+            <div className="flex items-center relative">
+              {/* Icon */}
+              
+              <div className="dropdown relative">
+                <a className="dropdown-toggle flex items-center hidden-arrow" href="#" id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-full" style={{height: '25px', width: '25px'}} alt="" loading="lazy" />
                 </a>
-              </li>
-              <li className="hover:bg-gray-100">
-                <a href="/events" className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                  </svg>
-                </a>
-              </li>
-              <li className="hover:bg-gray-100">
-                <a href="/archives" className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2
-                      0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                  </svg>
-                </a>
-              </li>
-              <li className="hover:bg-gray-100">
-                <a href="/mydashboard" className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx={9} cy={21} r={1} />
-                    <circle cx={20} cy={21} r={1} />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0
-                      2-1.61L23 6H6" />
-                  </svg>
-                </a>
-              </li>
-              <li className="hover:bg-gray-100">
-                <a href="." className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx={12} cy={12} r={3} />
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1
-                      0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0
-                      0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2
-                      2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0
-                      0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1
-                      0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0
-                      0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65
-                      0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0
-                      1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0
-                      1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2
-                      0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0
-                      1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0
-                      2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0
-                      0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65
-                      1.65 0 0 0-1.51 1z" />
-                  </svg>
-                </a>
-              </li>
-              <li className="hover:bg-gray-100">
-                <a href="." className="h-16 px-6 flex flex justify-center items-center w-full
-                  focus:text-orange-500">
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-            <div className="mt-auto h-16 flex items-center w-full">
-              {/* Action Section */}
-              <button className="h-16 w-10 mx-auto flex flex justify-center items-center
-                w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
-                <svg className="h-5 w-5 text-red-700" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1={21} y1={12} x2={9} y2={12} />
-                </svg>
-              </button>
+                <ul className="
+            dropdown-menu
+            min-w-max
+            absolute
+            hidden
+            bg-white
+            text-base
+            z-50
+            float-left
+            py-2
+            list-none
+            text-left
+            rounded-lg
+            shadow-lg
+            mt-1
+            hidden
+            m-0
+            bg-clip-padding
+            border-none
+            left-auto
+            right-0
+          " aria-labelledby="dropdownMenuButton2">
+                  <li>
+                    <a className="
+          dropdown-item
+          text-sm
+          py-2
+          px-4
+          font-normal
+          block
+          w-full
+          whitespace-nowrap
+          bg-transparent
+          text-gray-700
+          hover:bg-gray-100
+        " href="/login">Login with google</a>
+                  </li>
+                  <li>
+                    <a className="
+          dropdown-item
+          text-sm
+          py-2
+          px-4
+          font-normal
+          block
+          w-full
+          whitespace-nowrap
+          bg-transparent
+          text-gray-700
+          hover:bg-gray-100
+        " href="/dashboard">Your Dashboard</a>
+                  </li>
+                  
+                </ul>
+              </div>
             </div>
-          </aside>
-        </div>
+          </div>
+        </nav>
 
-      
+      </div>
     );
   }
 }
