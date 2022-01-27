@@ -6,7 +6,7 @@ import Events from './components/Events';
 import Clubs from './components/Clubs';
 import Archives from './components/Archives';
 import Footer from './components/Footer'
-import {BrowserRouter, Route, Routes, Redirect, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Redirect, Link, useNavigate} from 'react-router-dom';
 import './App.css';
 import HomePg from './components/HomePg';
 import queryString from 'query-string';
@@ -23,39 +23,45 @@ function App() {
   const [user,setUser] = useState();
   const [loggedIn, setLoggedIn] = useState(0);
 
+  const navigate = useNavigate();
 
-  const checkLogin = async () => {
-    await Axios.get('http://localhost:3000/log/in').then(response => {
-      console.log(response.data)
-      if (!!response.data.user) {
-        console.log('THERE IS A USER')
-        // this.setState({
-        //   loggedIn: true,
-        //   user: response.data.user
-        // })
-        setLoggedIn(true);
-        setUser(response.data.user);
-        return(<Link to="/" />);
-      } else {
-        setLoggedIn(false);
-        setUser(null);
-        // this.setState({
-        //   loggedIn: false,
-        //   user: null
-        // })
-      }
-    })
-  }
+  // const checkLogin = async () => {
+  //   await Axios.get('http://localhost:3000/log/in',{withCredentials: true}).then(response => {
+  //     console.log(response.data)
+  //     if (!!response.data.user) {
+  //       console.log('THERE IS A USER')
+  //       // this.setState({
+  //       //   loggedIn: true,
+  //       //   user: response.data.user
+  //       // })
+  //       setLoggedIn(true);
+  //       setUser(response.data.user);
+  //       navigate("/", {replace: true});
+  //     } else {
+  //       setLoggedIn(false);
+  //       setUser(null);
+  //       // this.setState({
+  //       //   loggedIn: false,
+  //       //   user: null
+  //       // })
+  //       navigate("/loginfail", {replace: true});
+  //     }
+  //   })
 
-  useEffect(() => {
-    checkLogin();
-  }, [])
+
+  // }
+
+  // useEffect(() => {
+  //   checkLogin();
+  // }, [])
   
 
 
   const handleLogin = async () => {
+    console.log("function called")
     await Axios.get('http://localhost:3000/log/in').then(response => {
       console.log(response.data)
+  
       if (!!response.data.user) {
         console.log('THERE IS A USER')
         // this.setState({
@@ -64,7 +70,8 @@ function App() {
         // })
         setLoggedIn(true);
         setUser(response.data.user);
-        return(<h1>logged in</h1>);
+        console.log("passed");
+        return(navigate("/", {replace: true}));
       } else {
         setLoggedIn(false);
         setUser(null);
@@ -72,7 +79,8 @@ function App() {
         //   loggedIn: false,
         //   user: null
         // })
-        return(<h1>Sorry -- login failed</h1>)
+        console.log("passed");
+        return(navigate("/loginfail", {replace: true}));
       }
 
       
@@ -82,15 +90,15 @@ function App() {
     <div className="App w-full">
       <Navbar LoggedIn={loggedIn} />
       <section id="mainSec">
-        <BrowserRouter>
+        
           <Routes>
             <Route exact path="/clubs" element={<Clubs />} />
             <Route exact path="/events" element={<Events/>} />
             <Route exact path="/archives" element={<Archives />} />
-            <Route exact path="/login" render={handleLogin}/>
+            <Route exact path="/login" render={handleLogin()}/>
             <Route path="/" element={<HomePg />} />
           </Routes>
-        </BrowserRouter>
+        
       </section>
       <Footer/>
     </div>

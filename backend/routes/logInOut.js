@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/in", (req, res) => {
-    if (req.user) res.redirect("/user");
+    if (req.user) res.send(true);
     else res.redirect("/auth/google");
 });
 
