@@ -11,6 +11,9 @@ import './App.css';
 import HomePg from './components/HomePg';
 import queryString from 'query-string';
 import Axios from 'axios';
+import GoogleLogin from 'react-google-login';
+import SignIn from './components/auth/Signin';
+import SignUp from './components/auth/Signup';
 
 
 function App() {
@@ -21,7 +24,7 @@ function App() {
 
   const [mounted, setmount] = useState(0);
   const [user,setUser] = useState();
-  const [loggedIn, setLoggedIn] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -57,45 +60,63 @@ function App() {
   
 
 
-  const handleLogin = async () => {
-    console.log("function called")
-    await Axios.get('http://localhost:3000/log/in').then(response => {
-      console.log(response.data)
+  // const handleLogin = async () => {
+  //   console.log("function called")
+  //   await Axios.get('http://localhost:3000/log/in').then(response => {
+  //     console.log(response.data)
   
-      if (!!response.data.user) {
-        console.log('THERE IS A USER')
-        // this.setState({
-        //   loggedIn: true,
-        //   user: response.data.user
-        // })
-        setLoggedIn(true);
-        setUser(response.data.user);
-        console.log("passed");
-        return(navigate("/", {replace: true}));
-      } else {
-        setLoggedIn(false);
-        setUser(null);
-        // this.setState({
-        //   loggedIn: false,
-        //   user: null
-        // })
-        console.log("passed");
-        return(navigate("/loginfail", {replace: true}));
-      }
+  //     if (!!response.data.user) {
+  //       console.log('THERE IS A USER')
+  //       // this.setState({
+  //       //   loggedIn: true,
+  //       //   user: response.data.user
+  //       // })
+  //       setLoggedIn(true);
+  //       setUser(response.data.user);
+  //       console.log("passed");
+  //       return(navigate("/", {replace: true}));
+  //     } else {
+  //       setLoggedIn(false);
+  //       setUser(null);
+  //       // this.setState({
+  //       //   loggedIn: false,
+  //       //   user: null
+  //       // })
+  //       console.log("passed");
+  //       return(navigate("/loginfail", {replace: true}));
+  //     }
 
       
-    })
-  }
+  //   })
+  // }
+
+
+  
+
+  // const LoginSuccess = async (response) => {
+  //   console.log(response.profile);
+  //   setLoggedIn(true);
+  //   return(navigate("/", {replace: true}));
+  // }
+
+  // const LoginFailure = (response) => {
+  //   console.log("login failed");
+  //   return(navigate("/", {replace: true}));
+  // }
+
+  
   return (
     <div className="App w-full">
       <Navbar LoggedIn={loggedIn} />
+
       <section id="mainSec">
         
           <Routes>
             <Route exact path="/clubs" element={<Clubs />} />
             <Route exact path="/events" element={<Events/>} />
             <Route exact path="/archives" element={<Archives />} />
-            <Route exact path="/login" render={handleLogin()}/>
+            <Route exact path="/login" element={<SignIn />}/>
+            <Route exact path="/signup" element={<SignUp />}/>
             <Route path="/" element={<HomePg />} />
           </Routes>
         

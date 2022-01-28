@@ -31,6 +31,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
+const GoogleLogin = require("./google/signin");
+const GoogleRegister = require("./google/signup");
+
+passport.use("google-signin", GoogleLogin);
+passport.use("google-signup", GoogleRegister);
+
 // routes
 require('./routes/passport-setup.js');
 
