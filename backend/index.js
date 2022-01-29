@@ -13,9 +13,11 @@ require('dotenv').config({path: __dirname + '/.env'});
 // app initialization and middleware 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-app.use(cors());
+app.use(bodyParser.json({limit: "30mb", extended: true}));
+app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
+app.use(cors({
+  origin: 'http://localhost:8000'
+}));
 
 const session1 = {
   secret: process.env.SESSION_SECRET,
@@ -28,6 +30,13 @@ app.use(cookieSession(session1));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+const GoogleLogin = require("./google/signin");
+const GoogleRegister = require("./google/signup");
+
+passport.use("google-signin", GoogleLogin);
+passport.use("google-signup", GoogleRegister);
 
 // routes
 require('./routes/passport-setup.js');
