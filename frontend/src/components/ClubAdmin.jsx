@@ -4,7 +4,7 @@ class ClubAdmin extends Component {
     render() {
         return (
             <div>
-                
+                Hi
             </div>
         );
     }
