@@ -7,13 +7,13 @@ import {useCookies} from 'react-cookie';
 
 
 function SignIn() {
-  const [cookies, setcookies] = useCookies(['loginCookie']);
+  const [cookies, setCookie] = useCookies(['loginCookie']);
   
   const [profile, setProfile] = useState();
 
   
  
-  setcookies('loginCookie',profile,{path: "/"});
+  
 
 
 
@@ -31,11 +31,15 @@ function SignIn() {
     //   .then((res) => console.log(res.data))
     //   .catch((err) => console.log(err));
 
-    setProfile(response.profile);
+    setProfile(response.profileObj);
+    setCookie('loginCookie',response.profileObj,{path: "/"});
     console.log(response);
     console.log("  ");
     console.log(response.profileObj);
   }; 
+
+
+  
   return (
     <GoogleLogin
       clientId="798387719989-5gdukn6hk0cbc8qorqqcsn8s0as9dr93.apps.googleusercontent.com"
