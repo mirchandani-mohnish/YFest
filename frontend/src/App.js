@@ -12,8 +12,8 @@ import HomePg from './components/HomePg';
 import queryString from 'query-string';
 import Axios from 'axios';
 import GoogleLogin from 'react-google-login';
-import SignIn from './components/auth/Signin';
-import SignUp from './components/auth/Signup';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 
 
 function App() {
