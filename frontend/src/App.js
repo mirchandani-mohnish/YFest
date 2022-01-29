@@ -108,7 +108,9 @@ function App() {
   return (
     <div className="App w-full">
       <Navbar LoggedIn={loggedIn} />
-
+      <SignUp />
+      <SignIn />
+      
       <section id="mainSec">
         
           <Routes>

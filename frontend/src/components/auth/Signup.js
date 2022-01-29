@@ -4,22 +4,23 @@ import axios from "axios";
 
 function SignUp() {
   const googleAuth = ({ profileObj }) => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/log/in",
-      data: {
-        googleId: profileObj.googleId,
-        email: profileObj.email,
-        first_name: profileObj.givenName,
-        last_name: profileObj.familyName,
-      },
-    })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:3000/log/in",
+    //   data: {
+    //     googleId: profileObj.googleId,
+    //     email: profileObj.email,
+    //     first_name: profileObj.givenName,
+    //     last_name: profileObj.familyName,
+    //   },
+    // })
+    //   .then((res) => console.log(res.data))
+    //   .catch((err) => console.log(err));
+    console.log(profileObj);
   };
   return (
     <GoogleLogin
-      clientId="1017985580457-loukgsoq6b4s7uv17emaqc2ps5f4c8gi.apps.googleusercontent.com"
+      clientId="798387719989-5gdukn6hk0cbc8qorqqcsn8s0as9dr93.apps.googleusercontent.com"
       onSuccess={googleAuth}
       onFailure={googleAuth}
       cookiePolicy={"single_host_origin"}
