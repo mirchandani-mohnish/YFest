@@ -6,7 +6,7 @@ import {useState} from 'react';
 
 
 function SignUp() {
-  const [cookies, setcookies] = useCookies(['loginCookie']);
+  const [cookies, setCookie] = useCookies(['loginCookie']);
   const [profile, setProfile] = useState();
   
   
@@ -28,15 +28,16 @@ function SignUp() {
     //   .then((res) => console.log(res.data))
     //   .catch((err) => console.log(err));
 
-    setProfile(response.profile);
-    
+    setProfile(response.profileObj);
+    setCookie('loginCookie',response.profileObj,{path: "/"});
     console.log(response);
     console.log("  ");
     console.log(response.profileObj);
   };
 
 
-  setcookies('loginCookie',profile,{path: "/"});
+  
+  
 
   return (
     <GoogleLogin

@@ -32,12 +32,6 @@ app.use(passport.session());
 
 
 
-const GoogleLogin = require("./google/signin");
-const GoogleRegister = require("./google/signup");
-
-passport.use("google-signin", GoogleLogin);
-passport.use("google-signup", GoogleRegister);
-
 // routes
 require('./routes/passport-setup.js');
 
@@ -76,6 +70,6 @@ app.use('/log', logR);
 // Database and Port setup
 const CONN_URL = `mongodb+srv://${process.env.DB_UNAME}:${process.env.DB_PWD}@cluster0.elyih.mongodb.net/yFEST?retryWrites=true&w=majority`;
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 
 mongoose.connect(CONN_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {app.listen(PORT); console.log("server working");}).catch((e) => console.log(e.message));
