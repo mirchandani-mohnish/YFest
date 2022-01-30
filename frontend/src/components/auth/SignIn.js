@@ -3,6 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import {useCookies} from 'react-cookie';
 
+axios.defaults.withCredentials = true;
 
 
 
@@ -32,7 +33,7 @@ function SignIn() {
     //   .catch((err) => console.log(err));
 
     setProfile(response.profileObj);
-    setCookie('loginCookie',response.profileObj,{path: "/"});
+    setCookie('loginCookie',response.profileObj,{withCredentials: true});
     console.log(response);
     console.log("  ");
     console.log(response.profileObj);

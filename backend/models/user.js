@@ -10,7 +10,7 @@ var userSchema = new Schema({
     name: String,
     clubOwner: Boolean,
     clubName: String,
-    events:[String],
+    events: [{type: Schema.Types.ObjectId, ref: 'event'}],
     image:String
 });
 userSchema.plugin(passportLocalMongoose);

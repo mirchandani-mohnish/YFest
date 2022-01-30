@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import './components.css'
 import 'tw-elements';
+import Axios from 'axios';
+Axios.defaults.withCredentials = true
 
 export default class HomePg extends Component {
+
+  async componentDidMount(){
+    try{
+        const Login = await Axios.get("http://localhost:8000/log/in");
+        console.log(Login.data);
+    }catch(err){
+        console.log(err);
+    }
+}
+
   render() {
     return (
     <div>
