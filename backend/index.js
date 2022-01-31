@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const ejs = require("ejs");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -14,6 +15,8 @@ require('dotenv').config({path: __dirname + '/.env'});
 // app initialization and middleware 
 const app = express();
 
+app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors({
@@ -60,10 +63,12 @@ const userR = require("./routes/user");
 const logR = require("./routes/logInOut");
 const eventsR = require("./routes/events");
 const clubsR = require("./routes/clubs");
+const adminR = require("./routes/admin");
 app.use('/clubs', clubsR);
 app.use('/events', eventsR);
 app.use('/user', userR);
 app.use('/log', logR);
+app.use("/admin", adminR);
 
 
 
