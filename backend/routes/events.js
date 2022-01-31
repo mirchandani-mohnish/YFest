@@ -40,5 +40,14 @@ router.post("/add", (req, res) => {
     }
 });
 
+router.get("/", (req, res) => {
+    Event.find({}, function(err, events) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(events);
+        }
+    });
+});
 
 module.exports = router;
